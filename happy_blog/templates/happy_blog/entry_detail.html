@@ -1,0 +1,6 @@
+<h1>{{ entry.title }}</h1>
+<p>{{ entry.pub_date }}</p>
+{{ entry.gallery }}
+{{ entry.content|safe }}
+<a href="{{ entry.get_prev_absolute_url }}">Previous article</a>
+<a href="{{ entry.get_next_absolute_url }}">Next article</a>
