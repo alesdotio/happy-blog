@@ -37,13 +37,9 @@ class Entry(TranslatableModel):
 
     def get_absolute_url(self):
         arguments = [self.pub_date.strftime('%Y'), self.pub_date.strftime('%m'), self.pub_date.strftime('%d'), self.lazy_translation_getter('slug', '')]
-        print arguments
-        print reverse('happy_blog_entry_detail', args=arguments)
         return reverse('happy_blog_entry_detail', args=arguments)
 
     def get_next(self):
-        print 'next'
-        print Entry.all_published.filter(pub_date__gt=self.pub_date)[:1]
         next = Entry.all_published.filter(pub_date__gt=self.pub_date)[:1]
         if next:
             next = next[0]
@@ -52,23 +48,26 @@ class Entry(TranslatableModel):
         return next
 
     def get_prev(self):
-        print 'prev'
-        print Entry.all_published.filter(pub_date__lt=self.pub_date)
         return Entry.all_published.filter(pub_date__lt=self.pub_date).latest('pub_date')
 
     def get_next_absolute_url(self):
         next = self.get_next()
-        print next
         if next:
             return next.get_absolute_url()
         return ''
 
     def get_prev_absolute_url(self):
         prev = self.get_prev()
-        print prev
         if prev:
             return prev.get_absolute_url()
         return ''
+
+    def get_first_image(self):
+        if self.gallery:
+            images = self.gallery.images.all()
+            if images:
+                return images[0].image
+        return None
 
     class Meta:
         verbose_name = _('entry')

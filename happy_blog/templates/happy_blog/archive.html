@@ -1,0 +1,6 @@
+<h1>Blog Archive</h1>
+<ul>
+{% for entry in entries %}
+	<li><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></li>
+{% endfor %}
+</ul>
