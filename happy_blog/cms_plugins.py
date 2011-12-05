@@ -13,7 +13,7 @@ class CMSListLatestBlogEntriesPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context.update({
             'instance': instance,
-            'entries': Entry.all_published.order_by('pub_date')[:instance.count],
+            'entries': Entry.all_published.order_by('-pub_date')[:instance.count],
             'placeholder': placeholder
         })
         return context
@@ -28,7 +28,7 @@ class CMSLatestBlogEntriesPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context.update({
             'instance': instance,
-            'entries': Entry.all_published.order_by('pub_date')[:instance.count],
+            'entries': Entry.all_published.order_by('-pub_date')[:instance.count],
             'placeholder': placeholder
         })
         return context
