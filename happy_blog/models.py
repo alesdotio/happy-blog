@@ -1,11 +1,8 @@
-from cms.models.fields import PlaceholderField
 from django.db import models
 from cms.models import CMSPlugin
-from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from nani.models import TranslatableModel, TranslatedFields
 from nani.manager import TranslationManager
-from filer.fields.image import FilerImageField
 import datetime
 from time import strftime
 from tinymce.models import HTMLField
