@@ -4,7 +4,7 @@ from happy_blog import __version__ as version
 setup(
     name = 'happy-blog',
     version = version,
-    description = '',
+    description = 'A simple django blog app that uses django-hvad for translations.',
     author = 'Ales Kocjancic',
     author_email = 'ales.kocjancic@divio.ch',
     url = 'https://github.com/neo64bit/happy-blog',
