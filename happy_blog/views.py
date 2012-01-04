@@ -1,5 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
+from django.template.context import Context
+from django.template.loader import get_template
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
 from django.contrib.syndication.views import Feed
@@ -19,14 +21,22 @@ class BlogArchive(ListView):
     template_name = 'happy_blog/archive.html'
 
 class BlogFeed(Feed):
-    title_template = 'happy_blog/feed_title.html'
-    description_template = 'happy_blog/feed_description.html'
+    title_template = 'happy_blog/feed_item_title.html'
+    description_template = 'happy_blog/feed_item_description.html'
 
-    def link(self, obj):
+    def title(self, item):
+        t = get_template('happy_blog/feed_title.html')
+        return t.render(Context({'item': item}))
+
+    def description(self, item):
+        t = get_template('happy_blog/feed_description.html')
+        return t.render(Context({'item': item}))
+
+    def link(self, item):
         return reverse('happy_blog_archive')
 
-    def get_queryset(self, obj):
+    def get_queryset(self, item):
         return Entry.all_published.order_by('pub_date')
 
-    def items(self, obj):
-        return self.get_queryset(obj)[:10]
+    def items(self, item):
+        return Entry.all_published.order_by('-pub_date')[:10]
