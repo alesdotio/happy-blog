@@ -7,7 +7,7 @@ setup(
     description = 'A simple django blog app that uses django-hvad for translations.',
     author = 'Ales Kocjancic',
     author_email = 'ales.kocjancic@divio.ch',
-    url = 'https://github.com/neo64bit/happy-blog',
+    url = 'https://github.com/alesdotio/happy-blog',
     packages = find_packages(),
     zip_safe=False,
     include_package_data = True,
